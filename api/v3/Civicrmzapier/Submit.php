@@ -13,7 +13,7 @@ function _civicrm_api3_civicrmzapier_Submit_spec(&$spec) {
 }
 
 /**
- * Civicrmzapier.Submit API
+ * Civicrmzapier.Submit API will be called executed by Civirules
  *
  * @param array $params
  * @return array API result descriptor

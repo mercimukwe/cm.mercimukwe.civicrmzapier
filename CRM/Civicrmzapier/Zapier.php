@@ -17,7 +17,7 @@ class CRM_Zapiercivicrm_Zapier{
     public static $userAuth;
     public static $userAuthValue ;
     public static $timeOut ;
-    public        $action ;    // this will vary based on the request
+    public static $action ;    // this will vary based on the request
     public static $requestContent;   // result from out api call will be placed here (json)
 
  /**
@@ -35,26 +35,11 @@ class CRM_Zapiercivicrm_Zapier{
         self::setUserAuth($userAuth);
         self::setUserAuthValue($userAuthValue);
         self::setTimeOut($timeOut);
-        $this->setAction($action);
+        self::setAction($action);
         self::setRequestContent($requestContent);
 
     }
 
-
-	 /**
-   * Method setup the webhook Data 
-   *
-   * @param  $  
-   * @return string $zapierUrlKey 
-   * @access public
-   * @static
-   */
-	public static function setUpWebhook(){
-
-        // this function makes available the data for CURL to use for requests
-
-
-	}
 
 	 /**
    * Method send Request to Zapier From CiviCRM
@@ -67,6 +52,7 @@ class CRM_Zapiercivicrm_Zapier{
 	public static function sendRequest(){
 
 	    // this is where the request is sent using curl
+
 
 	}
 
@@ -83,7 +69,6 @@ class CRM_Zapiercivicrm_Zapier{
 	    //here we receive the response and then we could make it available for confirmation
 
 
-
 	}
 
 
@@ -92,7 +77,7 @@ class CRM_Zapiercivicrm_Zapier{
      */
     public function setAction($action)
     {
-        $this->action = $action;
+        self::$action = $action;
     }
 
     /**
