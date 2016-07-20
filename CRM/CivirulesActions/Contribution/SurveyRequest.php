@@ -1,6 +1,6 @@
 <?php
 
-Class CRM_CivirulesActions_SurveyRequest extends CRM_Civirules_Action {
+Class CRM_CivirulesActions_Contribution_SurveyRequest extends CRM_Civirules_Action {
 
     public function getExtraDataInputUrl($ruleActionId) {
         return FALSE;
