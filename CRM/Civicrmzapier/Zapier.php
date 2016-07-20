@@ -93,7 +93,10 @@ class CRM_Zapiercivicrm_Zapier{
      */
     public static function setRequestContent($requestContent)
     {
+        // we get the contribution details from entity and set it
+
         self::$requestContent = $requestContent;
+
     }
 
     /**
