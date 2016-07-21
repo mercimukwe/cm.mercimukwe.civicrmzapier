@@ -40,7 +40,7 @@ Class CRM_CivirulesActions_Contribution_SurveyRequest extends CRM_Civirules_Acti
 
         //We now constitute the array to hold the contribution data
 
-        $contributionData =  array(
+        self::$contributionData =  array(
 
             'id' => $contributionDetails['id'],
             'contact_id ' => $contributionDetails['contact_id'],
