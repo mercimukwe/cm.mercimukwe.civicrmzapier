@@ -30,13 +30,17 @@ Class CRM_CivirulesActions_Contribution_SurveyRequest extends CRM_Civirules_Acti
         // we now have to make an api call to have the email and contact info of the contact id in contribution data
         // display_name and email
 
-        $displayName = civicrm_api3('Contact', 'getsingle', array(
-            'id' => $contributionDetails['contact_id'],
-            'return' => 'display_name'));
+        try {
 
-        $email = civicrm_api3('Contact', 'getsingle', array(
-            'id' => $contributionDetails['contact_id'],
-            'return' => 'email'));
+            $contact = civicrm_api3('Contact', 'getsingle', array(
+                'id' => $contributionDetails['contact_id']));
+            
+        } catch (CiviCRM_API3_Exception $ex) {
+
+            throw new Exception('Could not obtain the contact details display_name and email '.__METHOD__
+            .', contact your system administrator. Error message from API Contact getsingle: '.$ex->getMessage());
+        }
+
 
         //We now constitute the array to hold the contribution data
 
@@ -47,8 +51,8 @@ Class CRM_CivirulesActions_Contribution_SurveyRequest extends CRM_Civirules_Acti
             'total_amount' => $contributionDetails['total_amount'],
             'receive_date' => $contributionDetails['receive_date'],
             'currency' => $contributionDetails['currency'],
-            'display_name' => $displayName,
-            'email' => $email
+            'display_name' => $contact['display_name'],
+            'email' => $contact['email']
 
         );
 
