@@ -30,11 +30,11 @@ Class CRM_CivirulesActions_Contribution_SurveyRequest extends CRM_Civirules_Acti
         // we now have to make an api call to have the email and contact info of the contact id in contribution data
         // display_name and email
 
-        $displayName = civicrm_api3('Contact', 'getvalue', array(
+        $displayName = civicrm_api3('Contact', 'getsingle', array(
             'id' => $contributionDetails['contact_id'],
             'return' => 'display_name'));
 
-        $email = civicrm_api3('Contact', 'getvalue', array(
+        $email = civicrm_api3('Contact', 'getsingle', array(
             'id' => $contributionDetails['contact_id'],
             'return' => 'email'));
 
@@ -66,7 +66,7 @@ Class CRM_CivirulesActions_Contribution_SurveyRequest extends CRM_Civirules_Acti
     // we now return the contribution details for usage by the generic Zapier class
 
     /**
-     * @return $contributionDetails
+     * @return $contributionData
      */
     public static function getContributionData()
     {
