@@ -18,15 +18,16 @@ class CRM_Zapiercivicrm_Survey extends CRM_Zapiercivicrm_Zapier{
      *
      * CRM_Zapiercivicrm_Survey constructor.
      */
-    function __construct()
-    {
-        parent::$hookUrl = "https://zapier.com/hooks/catch/1212097/u90dpo/";
-        parent::$action ="POST";
-        parent::$userAuthValue="T3KxLDWdkJtND3P9";
-        parent::$timeOut=30;
-        parent::$requestContent = CRM_CivirulesActions_Contribution_SurveyRequest::getContributionDetails();
 
-    }
+        public static $hookUrl = "https://zapier.com/hooks/catch/1212097/u90dpo/";
+        public static $userAuth ='api_key';
+        public static $action ="POST";
+        public static $userAuthValue="T3KxLDWdkJtND3P9";
+        public static $timeOut=30;
+
+        public static $requestContent;
+
+
 
     /**
      *  Sends a survey which is a request
@@ -35,12 +36,18 @@ class CRM_Zapiercivicrm_Survey extends CRM_Zapiercivicrm_Zapier{
 
     public function sendSurvey(){
 
+        //we set the request content before we do the configuration
+
+        self::$requestContent = CRM_CivirulesActions_Contribution_SurveyRequest::getContributionData();
+
         // we call the parent config function to configure webhook
 
+        parent::config(self::$hookUrl,self::$userAuth , self::$userAuthValue , self::$timeOut , self::$action , self::$requestContent);
 
-        //we send the request
 
+        //we send the request by calling the Zapier funtion sendRequest which uses curl
 
+       // parent::sendRequest();
 
 
 

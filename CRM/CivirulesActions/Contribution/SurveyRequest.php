@@ -71,8 +71,8 @@ Class CRM_CivirulesActions_Contribution_SurveyRequest extends CRM_Civirules_Acti
         }
 
         // we debug to see what we have as response
-        CRM_Core_Error::debug('this is what the object has', $zapier_api_call);
-        exit();
+//         CRM_Core_Error::debug('this is what the object has', $zapier_api_call);
+//         exit();
 
     }
 
