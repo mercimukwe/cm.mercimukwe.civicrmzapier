@@ -13,7 +13,7 @@ function _civicrm_api3_civicrmzapier_Submit_spec(&$spec) {
 }
 
 /**
- * Civicrmzapier.Submit API will be called executed by Civirules
+ * Civicrmzapier.Submit API will be called and executed by Civirules
  *
  * @param array $params
  * @return array API result descriptor
@@ -22,19 +22,12 @@ function _civicrm_api3_civicrmzapier_Submit_spec(&$spec) {
  * @throws API_Exception
  */
 function civicrm_api3_civicrmzapier_Submit($params) {
-  if (array_key_exists('magicword', $params) && $params['magicword'] == 'sesame') {
-    $returnValues = array( // OK, return several data rows
-      12 => array('id' => 12, 'name' => 'Twelve'),
-      34 => array('id' => 34, 'name' => 'Thirty four'),
-      56 => array('id' => 56, 'name' => 'Fifty six'),
-    );
-    // ALTERNATIVE: $returnValues = array(); // OK, success
-    // ALTERNATIVE: $returnValues = array("Some value"); // OK, return a single value
 
-    // Spec: civicrm_api3_create_success($values = 1, $params = array(), $entity = NULL, $action = NULL)
-    return civicrm_api3_create_success($returnValues, $params, 'NewEntity', 'NewAction');
-  } else {
-    throw new API_Exception(/*errorMessage*/ 'Everyone knows that the magicword is "sesame"', /*errorCode*/ 1234);
-  }
+
+    $returnValues = CRM_Zapiercivicrm_Survey::sendSurvey();
+
+    return civicrm_api3_create_success($returnValues, $params, 'CiviRuleAction', 'submit');
+
+
 }
 

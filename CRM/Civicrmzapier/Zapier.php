@@ -119,6 +119,8 @@ class CRM_Zapiercivicrm_Zapier{
 
         $session = CRM_Core_Session::singleton();
 
+        // depending on the nature of the curl response we output the response status
+
         switch (self::$overallResponse){
 
             case 'error':

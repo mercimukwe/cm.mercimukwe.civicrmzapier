@@ -34,7 +34,7 @@ class CRM_Zapiercivicrm_Survey extends CRM_Zapiercivicrm_Zapier{
      *
      */
 
-    public function sendSurvey(){
+    public static function sendSurvey(){
 
         //we set the request content before we do the configuration
 
@@ -47,9 +47,16 @@ class CRM_Zapiercivicrm_Survey extends CRM_Zapiercivicrm_Zapier{
 
         //we send the request by calling the Zapier funtion sendRequest which uses curl
 
-       // parent::sendRequest();
+        parent::sendRequest('POST');
 
 
+        //we mow get the respomse of the request
+
+        parent::receiveResponse();
+
+
+        // we will returnt the request content to the calling API method
+        return self::$requestContent;
 
     }
 

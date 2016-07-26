@@ -74,6 +74,7 @@ Class CRM_CivirulesActions_Contribution_SurveyRequest extends CRM_Civirules_Acti
 //         CRM_Core_Error::debug('this is what the object has', $zapier_api_call);
 //         exit();
 
+        return $zapier_api_call;
     }
 
     // we now return the contribution details for usage by the generic Zapier class
