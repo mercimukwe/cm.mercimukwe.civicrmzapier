@@ -4,8 +4,9 @@
 Class CRM_CivirulesActions_Contribution_SurveyRequest extends CRM_Civirules_Action {
 
 
-    public static $contributionData;
+
     public static $params;
+    public static $zapierApiCallResult;
 
 
     public function getExtraDataInputUrl($ruleActionId) {
@@ -23,9 +24,9 @@ Class CRM_CivirulesActions_Contribution_SurveyRequest extends CRM_Civirules_Acti
        $contributionDetails = $triggerData->getEntityData('Contribution');
 
 //        we see the object content at debug mode
-//
-//        CRM_Core_Error::debug('this is what the object has', $contributionDetails);
-//        exit();
+//--------------------   DEBUG ---------------------------------
+      // CRM_Core_Error::debug('this is what the object has', $contributionDetails);
+
 
         // we now have to make an api call to have the email and contact info of the contact id in contribution data
         // display_name and email
@@ -34,6 +35,9 @@ Class CRM_CivirulesActions_Contribution_SurveyRequest extends CRM_Civirules_Acti
 
             $contact = civicrm_api3('Contact', 'getsingle', array(
                 'id' => $contributionDetails['contact_id']));
+            //-------------DEBUG----------------------------------------
+           // CRM_Core_Error::debug('the contat info is ', $contact);
+           // exit();
 
         } catch (CiviCRM_API3_Exception $ex) {
 
@@ -44,7 +48,7 @@ Class CRM_CivirulesActions_Contribution_SurveyRequest extends CRM_Civirules_Acti
 
         //We now constitute the array to hold the contribution data
 
-        self::$contributionData =  array(
+        $contibutoinInfo =  array(
 
             'id' => $contributionDetails['id'],
             'contact_id ' => $contributionDetails['contact_id'],
@@ -56,15 +60,31 @@ Class CRM_CivirulesActions_Contribution_SurveyRequest extends CRM_Civirules_Acti
 
         );
 
+        //--------------------- DEBUG ----------------------------------
+       // CRM_Core_Error::debug('this is what the object has', self::$contributionData);
+       // exit();
+
+
 
         //we have to format the data and then call the api submit method of the Zapier entity
         // like so civicrm_api3('Zapier', 'submit',$contributionData )
 
         try{
 
-            $zapier_api_call =  civicrm_api3('Civicrmzapier', 'submit', self::$contributionData);
+//            CRM_Core_Error::debug('this is what the object has ', $contibutoinInfo);
+//            exit();
+
+            civicrm_api3('Civicrmzapier', 'submit', $contibutoinInfo);
+
+             //-------------------------DEBUG--------------------------------
+//            CRM_Core_Error::debug('this is what the object has', self::$zapierApiCallResult);
+//            exit();
 
         }catch (CiviCRM_API3_Exception $ex){
+
+//            ---------   DEBUG  -----------------------------
+//            CRM_Core_Error::debug('this is what the contribution info has', $contibutoinInfo);
+//            exit();
 
             throw new Exception('Could not submit request to Zapier through API ' .__METHOD__ .'
             check extension API method ' .$ex->getMessage());
@@ -74,7 +94,7 @@ Class CRM_CivirulesActions_Contribution_SurveyRequest extends CRM_Civirules_Acti
 //         CRM_Core_Error::debug('this is what the object has', $zapier_api_call);
 //         exit();
 
-        return $zapier_api_call;
+        return self::$zapierApiCallResult;
     }
 
     // we now return the contribution details for usage by the generic Zapier class

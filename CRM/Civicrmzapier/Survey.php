@@ -1,6 +1,6 @@
 <?php
 
-require('/CRM/CivicrmZapier/Zapier.php');
+require('Zapier.php');
 
 /**
 *  $this -> userAuth = "api_key";
@@ -19,14 +19,11 @@ class CRM_Zapiercivicrm_Survey extends CRM_Zapiercivicrm_Zapier{
      * CRM_Zapiercivicrm_Survey constructor.
      */
 
-        public static $hookUrl = "https://zapier.com/hooks/catch/1212097/u90dpo/";
-        public static $userAuth ='api_key';
-        public static $action ="POST";
-        public static $userAuthValue="T3KxLDWdkJtND3P9";
-        public static $timeOut=30;
-
-        public static $requestContent;
-
+        protected $hookUrl = "https://zapier.com/hooks/catch/1212097/u90dpo/";
+        protected $userAuth ='api_key';
+        protected $action ="POST";
+        protected $userAuthValue="T3KxLDWdkJtND3P9";
+        protected $timeOut=30;
 
 
     /**
@@ -34,29 +31,30 @@ class CRM_Zapiercivicrm_Survey extends CRM_Zapiercivicrm_Zapier{
      *
      */
 
-    public static function sendSurvey(){
+    public static function sendSurvey($parameters){
 
         //we set the request content before we do the configuration
 
-        self::$requestContent = CRM_CivirulesActions_Contribution_SurveyRequest::getContributionData();
+       // self::$requestContent = CRM_CivirulesActions_Contribution_SurveyRequest::getContributionData();
 
         // we call the parent config function to configure webhook
 
-        parent::config(self::$hookUrl,self::$userAuth , self::$userAuthValue , self::$timeOut , self::$action , self::$requestContent);
 
 
-        //we send the request by calling the Zapier funtion sendRequest which uses curl
-
-        parent::sendRequest('POST');
+//        //we send the request by calling the Zapier funtion sendRequest which uses curl
+//
+        parent::sendRequest($parameters);
 
 
         //we mow get the respomse of the request
 
-        parent::receiveResponse();
+    //    parent::receiveResponse();
 
 
         // we will returnt the request content to the calling API method
-        return self::$requestContent;
+       // return self::$requestContent;
+
+        return $parameters;
 
     }
 

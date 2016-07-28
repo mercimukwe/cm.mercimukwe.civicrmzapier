@@ -1,5 +1,7 @@
 <?php
 
+require_once('CRM/Civicrmzapier/Zapier.php');
+
 /**
  * Civicrmzapier.Submit API specification (optional)
  * This is used for documentation and validation.
@@ -9,7 +11,7 @@
  * @see http://wiki.civicrm.org/confluence/display/CRMDOC/API+Architecture+Standards
  */
 function _civicrm_api3_civicrmzapier_Submit_spec(&$spec) {
-  $spec['magicword']['api.required'] = 1;
+ // $spec['contact_id']['api.required'] = 1;
 }
 
 /**
@@ -23,10 +25,43 @@ function _civicrm_api3_civicrmzapier_Submit_spec(&$spec) {
  */
 function civicrm_api3_civicrmzapier_Submit($params) {
 
+    ;
+    if(array_key_exists('id', $params)){
 
-    $returnValues = CRM_Zapiercivicrm_Survey::sendSurvey();
+       // CRM_Zapiercivicrm_Survey::sendSurvey();
 
-    return civicrm_api3_create_success($returnValues, $params, 'CiviRuleAction', 'submit');
+
+//       $return = CRM_Zapiercivicrm_Zapier::config("https://zapier.com/hooks/catch/1212097/u90dpo/",
+//                                                 'api_key'
+//                                        ,        "T3KxLDWdkJtND3P9" ,
+//                                                 30,
+//                                                    "POST"
+//                                                , $params);
+//
+
+        $zapier = new CRM_Zapiercivicrm_Zapier();
+
+
+        $zapier->config("https://zapier.com/hooks/catch/1212097/u90dpo/",
+                                                 'api_key'
+                                                ,"T3KxLDWdkJtND3P9" ,
+                                                 30
+                                                );
+
+//        CRM_Core_Error::debug('this is what the object 11 has', $params);
+
+
+        $returnvals =  $zapier->sendRequest($params);
+
+        CRM_Core_Error::debug('return values in API ', $returnvals);
+        exit();
+
+        //return civicrm_api3_create_success($returnValues, $params, 'NewEntity', 'NewAction');
+
+    }else{
+
+        throw new API_Exception('API call not successfule' .$params);
+    }
 
 
 }
