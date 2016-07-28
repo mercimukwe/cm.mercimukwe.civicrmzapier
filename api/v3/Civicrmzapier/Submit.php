@@ -28,16 +28,6 @@ function civicrm_api3_civicrmzapier_Submit($params) {
     ;
     if(array_key_exists('id', $params)){
 
-       // CRM_Zapiercivicrm_Survey::sendSurvey();
-
-
-//       $return = CRM_Zapiercivicrm_Zapier::config("https://zapier.com/hooks/catch/1212097/u90dpo/",
-//                                                 'api_key'
-//                                        ,        "T3KxLDWdkJtND3P9" ,
-//                                                 30,
-//                                                    "POST"
-//                                                , $params);
-//
 
         $zapier = new CRM_Zapiercivicrm_Zapier();
 
@@ -50,17 +40,24 @@ function civicrm_api3_civicrmzapier_Submit($params) {
 
 //        CRM_Core_Error::debug('this is what the object 11 has', $params);
 
+        //We send the request from the parent class... we can do that from the child  class
+        // CRM_Zapiercivicrm_Survey::sendSurvey();
 
-        $returnvals =  $zapier->sendRequest($params);
 
-        CRM_Core_Error::debug('return values in API ', $returnvals);
-        exit();
+        $zapier->sendRequest($params);
+
+        // we get the response value to see if the request was sent
+         $zapier->receiveResponse();
+
+
+//        CRM_Core_Error::debug('return values in API ', $returnvals);
+//        exit();
 
         //return civicrm_api3_create_success($returnValues, $params, 'NewEntity', 'NewAction');
 
     }else{
 
-        throw new API_Exception('API call not successfule' .$params);
+        throw new API_Exception('API call not successfull' .$params);
     }
 
 

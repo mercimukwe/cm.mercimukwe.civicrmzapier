@@ -108,7 +108,7 @@
 
             $this->requestError = curl_error($curl);
 
-        CRM_Core_Error::debug('curl error in Zapier class ', $this->requestError);
+       // CRM_Core_Error::debug('curl error in Zapier class ', $this->requestError);
 
 
         return $requestCONT;
@@ -138,7 +138,7 @@
                 break;
 
             case 'success':
-                $session->setStatus('Request Sent Successfully', 'Zapier Request', 'success');
+                $session->setStatus('Request Sent To Zapier Successfully', 'Zapier Request', 'success');
                 break;
 
             default:
