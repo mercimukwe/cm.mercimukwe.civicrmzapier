@@ -46,7 +46,33 @@ function civicrmzapier_civicrm_uninstall() {
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_enable
  */
 function civicrmzapier_civicrm_enable() {
-  _civicrmzapier_civix_civicrm_enable();
+
+
+    try {
+
+        // we try to make a call to the CiviCRM zapier API
+
+        $installedExtensions =  civicrm_api3('Civicrmzapier', 'submit', array());
+
+        foreach ($installedExtensions['values'] as $extension) {
+
+            if ($extension['key'] = 'cm.mercimukwe.civicrmzapier' && $extension['status'] == 'installed') {
+
+                $foundExtension = TRUE;
+            }
+        }
+
+    } catch (CiviCRM_API3_Exception $ex) {
+
+        throw new Exception(ts('Could not find Extensions , error from API Extension Submit: '.$ex->getMessage()));
+
+    }
+
+    _civicrmzapier_civix_civicrm_enable();
+
+
+
+
 }
 
 /**
