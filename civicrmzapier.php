@@ -59,12 +59,13 @@ function civicrmzapier_civicrm_enable() {
             if ($extension['key'] = 'cm.mercimukwe.civicrmzapier' && $extension['status'] == 'installed') {
 
                 $foundExtension = TRUE;
+
             }
         }
 
     } catch (CiviCRM_API3_Exception $ex) {
 
-        throw new Exception(ts('Could not find Extensions , error from API Extension Submit: '.$ex->getMessage()));
+        throw new Exception(ts('Check that this extension is installed , error from API Extension entity: '.$ex->getMessage()));
 
     }
 
