@@ -52,11 +52,11 @@ function civicrmzapier_civicrm_enable() {
 
         // we try to make a call to the CiviCRM zapier API
 
-        $installedExtensions =  civicrm_api3('Civicrmzapier', 'submit', array());
+        $installedExtensions =  civicrm_api3('Extension', 'get', array());
 
         foreach ($installedExtensions['values'] as $extension) {
 
-            if ($extension['key'] = 'cm.mercimukwe.civicrmzapier' && $extension['status'] == 'installed') {
+            if ($extension['key'] = 'org.civicoop.civirules' && $extension['status'] == 'installed') {
 
                 $foundExtension = TRUE;
 
