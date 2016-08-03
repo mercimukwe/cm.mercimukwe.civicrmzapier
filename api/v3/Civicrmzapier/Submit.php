@@ -25,7 +25,6 @@ function _civicrm_api3_civicrmzapier_Submit_spec(&$spec) {
  */
 function civicrm_api3_civicrmzapier_Submit($params) {
 
-    ;
     if(array_key_exists('id', $params)){
 
 
@@ -47,7 +46,7 @@ function civicrm_api3_civicrmzapier_Submit($params) {
         $zapier->sendRequest($params);
 
         // we get the response value to see if the request was sent
-         $zapier->receiveResponse();
+        $zapier->receiveResponse();
 
 
 //        CRM_Core_Error::debug('return values in API ', $returnvals);
@@ -55,11 +54,10 @@ function civicrm_api3_civicrmzapier_Submit($params) {
 
         //return civicrm_api3_create_success($returnValues, $params, 'NewEntity', 'NewAction');
 
-    }else{
+    } else {
 
         throw new API_Exception('API call not successfull' .$params);
     }
-
 
 }
 
