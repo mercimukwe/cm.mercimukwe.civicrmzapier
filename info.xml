@@ -20,7 +20,7 @@
   <compatibility>
     <ver>4.2</ver>
   </compatibility>
-  <comments>This is a fully developed module </comments>
+  <comments>This is a fully developed extension</comments>
   <civix>
     <namespace>CRM/Civicrmzapier</namespace>
   </civix>
