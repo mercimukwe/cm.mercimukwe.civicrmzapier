@@ -72,7 +72,7 @@ function civicrmzapier_civicrm_enable() {
 
     if (!$foundExtension) {
        
-        throw new Exception(ts('Active installation could not be found, extension cannot be enabled');
+        throw new Exception(ts('could not find an active installation of the CiviRules extension. This extension is required therefore the extension civicrmzapier is not enabled');
   }
     
     _civicrmzapier_civix_civicrm_enable();
