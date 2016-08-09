@@ -47,7 +47,8 @@ function civicrmzapier_civicrm_uninstall() {
  */
 function civicrmzapier_civicrm_enable() {
 
-
+        $foundExtension = FALSE;
+        
     try {
 
         // we try to make a call to the CiviCRM zapier API
@@ -69,10 +70,12 @@ function civicrmzapier_civicrm_enable() {
 
     }
 
+    if (!$foundExtension) {
+       
+        throw new Exception(ts('Active installation could not be found, extension cannot be enabled');
+  }
+    
     _civicrmzapier_civix_civicrm_enable();
-
-
-
 
 }
 
